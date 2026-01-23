@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple风格媒体展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background-color: #f5f5f7;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #d2d2d7;
+            height: 52px;
+            padding: 0 22px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo i {
+            margin-right: 8px;
+            color: #007aff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007aff;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 18px;
+            margin-left: 20px;
+            cursor: pointer;
+            color: #1d1d1f;
+        }
+
+        /* 主要内容区 */
+        main {
+            margin-top: 52px;
+        }
+
+        .hero-section {
+            max-width: 1200px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #424245 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 30px;
+        }
+
+        /* 媒体展示区域 */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background-color: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .media-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover .gallery-img,
+        .gallery-item:hover .gallery-video {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007aff;
+            font-size: 24px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .play-icon {
+            transform: scale(1);
+        }
+
+        .media-type-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            z-index: 2;
+        }
+
+        .gallery-info {
+            padding: 22px;
+        }
+
+        .gallery-title {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .gallery-title i {
+            margin-right: 10px;
+            color: #007aff;
+        }
+
+        .gallery-description {
+            font-size: 16px;
+            color: #86868b;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .gallery-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .gallery-tag {
+            background-color: #f5f5f7;
+            color: #424245;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        /* 大图/视频预览 */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-media {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-video {
+            width: 800px;
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-info {
+            color: #fff;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .lightbox-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-description {
+            font-size: 18px;
+            color: #d2d2d7;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .lightbox-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .lightbox-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* 特色视频区域 */
+        .featured-video-section {
+            max-width: 1200px;
+            margin: 60px auto 80px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1d1d1f;
+        }
+
+        .video-player-container {
+            background-color: #000;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .featured-video {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .video-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .control-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #f5f5f7;
+            border-top: 1px solid #d2d2d7;
+            padding: 40px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #424245;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #007aff;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #d2d2d7;
+            color: #86868b;
+            font-size: 13px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .featured-video {
+                height: 400px;
+            }
+            
+            .lightbox-title {
+                font-size: 28px;
+            }
+            
+            .lightbox-description {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-subtitle {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-video {
+                height: 300px;
+            }
+
+            .video-title {
+                font-size: 18px;
+            }
+            
+            .lightbox-title {
+                font-size: 24px;
+            }
+            
+            .lightbox-description {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .nav-logo span {
+                display: none;
+            }
+
+            .featured-video {
+                height: 200px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .lightbox-title {
+                font-size: 20px;
+            }
+            
+            .lightbox-description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fab fa-apple"></i>
+                <span>媒体展示</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">图片</a></li>
+                <li><a href="#">视频</a></li>
+                <li><a href="#">精选</a></li>
+                <li><a href="#">关于</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <i class="fas fa-search"></i>
+                <!-- <i class="fas fa-shopping-bag"></i> -->
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main>
+        <!-- 标题区域 -->
+        <section class="hero-section">
+            <h1 class="hero-title">视觉媒体画廊</h1>
+            <p class="hero-subtitle">探索令人惊叹的高质量图片与视频集，感受每一帧的视觉之美。</p>
+        </section>
+
+
+        <!-- 媒体展示区域 -->
+        <section class="gallery-container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- 媒体项将通过JavaScript动态生成 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 大图/视频预览 -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="lightboxMediaContainer"></div>
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle" class="lightbox-title"></h3>
+                <p id="lightboxDescription" class="lightbox-description"></p>
+                <div id="lightboxTags" class="lightbox-tags"></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // 媒体数据 - 确保所有图片和视频都有完整的数据
+        const mediaData = [
+            {
+                id: 1,
+                title: "海岸日出",
+                description: "清晨的第一缕阳光洒在宁静的海岸线上，金色的光芒与蔚蓝的海水交相辉映，创造出一天中最宁静而壮丽的时刻。",
+                tags: ["自然", "海岸", "日出", "海洋", "晨光"],
+                mediaUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                type: "image"
+            },
+            {
+                id: 2,
+                title: "瀑布流动",
+                description: "壮观的瀑布水流动态视频，感受自然的力量与水的韵律，水流从高处倾泻而下，形成白色水幕。",
+                tags: ["瀑布", "水流", "自然", "动态", "水景"],
+                mediaUrl: "https://v3-web.toutiaovod.com/8999e1e208e2f00abd43eae1f6094a40/69732225/video/tos/cn/tos-cn-ve-15/o4vA0fgcvgf9DlCIg87EA6BDHAbFQyqipG9VWz/?a=24&ch=94349560412&cr=0&dr=0&er=0&lr=unwatermarked&net=5&cd=0%7C0%7C0%7C0&cv=1&br=641&bt=641&cs=0&ds=1&ft=hGkwBy6LRR0sWrC12D12Nc.xBiGNbL-Yia-U_4c5eL5JNv7TGW&mime_type=video_mp4&qs=0&rc=ZGRnZTc5OGdnZjM6OmYzZkBpMzt1dG85cnkzODMzNDlpM0BgYmFhLS42XjMxLl4wMy5fYSNuY15yMmQ0cmthLS1kMC9zcw%3D%3D&btag=c0000e00010000&dy_q=1769149446&feature_id=fea919893f650a8c49286568590446ef&l=202601231424050EA252AABCED65EB4A08",
+                type: "video",
+                thumbnail: ""
+            },
+            {
+                id: 3,
+                title: "都市夜景",
+                description: "繁华都市夜晚的灯光如星辰般璀璨，摩天大楼的轮廓在夜幕中勾勒出现代城市的魅力与活力。",
+                tags: ["城市", "夜景", "建筑", "灯光", "都市"],
+                mediaUrl: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1244&q=80",
+                type: "image"
+            },
+            {
+                id: 4,
+                title: "森林漫步",
+                description: "穿越宁静森林的第一人称视角视频，阳光透过茂密的树冠洒下斑驳光影，感受大自然的神秘与宁静。",
+                tags: ["森林", "自然", "漫步", "树木", "光影"],
+                mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-forest-4290-large.mp4",
+                type: "video",
+                thumbnail: "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 5,
+                title: "沙漠日落",
+                description: "金色沙丘在日落时分展现出迷人光影，沙漠的广袤与夕阳的温柔色彩形成强烈对比，呈现自然界的壮美。",
+                tags: ["沙漠", "日落", "自然", "沙丘", "黄昏"],
+                mediaUrl: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1226&q=80",
+                type: "image"
+            },
+            {
+                id: 6,
+                title: "星空延时",
+                description: "夜空中星辰运动的延时摄影视频，捕捉银河旋转的壮丽景象，展现宇宙的浩瀚与神秘。",
+                tags: ["星空", "夜空", "延时", "银河", "宇宙"],
+                mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-stars-in-the-sky-4293-large.mp4",
+                type: "video",
+                thumbnail: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 7,
+                title: "湖畔倒影",
+                description: "平静湖面倒映着秋天的多彩山林，水面如镜般清澈，将岸上景色完美复制，创造出一幅对称的自然画卷。",
+                tags: ["湖泊", "倒影", "秋天", "水面", "山林"],
+                mediaUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                type: "image"
+            },
+            {
+                id: 8,
+                title: "城市车流",
+                description: "夜间城市车流的光轨延时视频，车辆灯光在长时间曝光下形成流动的光线，展现都市夜晚的动态之美。",
+                tags: ["城市", "车流", "夜景", "光轨", "延时"],
+                mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-vehicle-traffic-on-a-bridge-4294-large.mp4",
+                type: "video",
+                thumbnail: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 9,
+                title: "雪山巅峰",
+                description: "雄伟的雪山在蓝天映衬下格外壮观，冰雪覆盖的山峰在阳光下闪耀，展现高山地区的纯净与壮丽。",
+                tags: ["雪山", "山脉", "自然", "冰雪", "高峰"],
+                mediaUrl: "https://images.unsplash.com/photo-1464278533981-50106e6176b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+                type: "image"
+            },
+            {
+                id: 10,
+                title: "极光舞动",
+                description: "绿色极光在夜空中舞动的壮丽景象，如梦幻般的色彩在北极星空中跳跃变化，展现自然界最神奇的光影表演。",
+                tags: ["极光", "夜空", "自然", "北极光", "星空"],
+                mediaUrl: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                type: "image"
+            }
+        ];
+
+        // 生成媒体展示项
+        const galleryGrid = document.getElementById('galleryGrid');
+        
+        function renderMediaItems() {
+            galleryGrid.innerHTML = '';
+            
+            mediaData.forEach(item => {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'gallery-item';
+                mediaItem.setAttribute('data-id', item.id);
+                mediaItem.setAttribute('data-type', item.type);
+                
+                // 根据媒体类型生成不同的HTML
+                const mediaHTML = item.type === 'image' 
+                    ? `
+                        <div class="media-container">
+                            <img src="${item.mediaUrl}" alt="${item.title}" class="gallery-img">
+                        </div>
+                    `
+                    : `
+                        <div class="media-container">
+                            <video class="gallery-video" preload="metadata" poster="${item.thumbnail || ''}">
+                                <source src="${item.mediaUrl}" type="video/mp4">
+                            </video>
+                            <div class="play-overlay">
+                                <div class="play-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="media-type-badge">
+                                <i class="fas fa-video"></i> 视频
+                            </div>
+                        </div>
+                    `;
+                
+                // 生成标签HTML
+                const tagsHTML = item.tags.map(tag => `<span class="gallery-tag">${tag}</span>`).join('');
+                
+                mediaItem.innerHTML = `
+                    ${mediaHTML}
+                    <div class="gallery-info">
+                        <h3 class="gallery-title">
+                            ${item.type === 'video' ? '<i class="fas fa-video"></i>' : '<i class="fas fa-image"></i>'}
+                            ${item.title}
+                        </h3>
+                        <p class="gallery-description">${item.description}</p>
+                        <div class="gallery-tags">
+                            ${tagsHTML}
+                        </div>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(mediaItem);
+                
+                // 添加点击事件
+                mediaItem.addEventListener('click', () => openLightbox(item));
+            });
+        }
+        
+        // 初始渲染
+        renderMediaItems();
+
+        // 大图/视频预览功能
+        const lightbox = document.getElementById('lightbox');
+        const lightboxMediaContainer = document.getElementById('lightboxMediaContainer');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDescription = document.getElementById('lightboxDescription');
+        const lightboxTags = document.getElementById('lightboxTags');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(item) {
+            lightboxTitle.textContent = item.title;
+            lightboxDescription.textContent = item.description;
+            
+            // 生成标签HTML
+            const tagsHTML = item.tags.map(tag => `<span class="lightbox-tag">${tag}</span>`).join('');
+            lightboxTags.innerHTML = tagsHTML;
+            
+            // 根据媒体类型生成不同的预览内容
+            if (item.type === 'image') {
+                lightboxMediaContainer.innerHTML = `
+                    <img class="lightbox-media" src="${item.mediaUrl}" alt="${item.title}">
+                `;
+            } else {
+                lightboxMediaContainer.innerHTML = `
+                    <video class="lightbox-video" controls autoplay>
+                        <source src="${item.mediaUrl}" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                `;
+            }
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            // 停止视频播放
+            const video = lightboxMediaContainer.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+            
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 关闭大图预览
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        
+        // 导航栏滚动效果
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // 向下滚动
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // 向上滚动
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
