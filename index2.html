@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>5个月 · 宝妈健康蜕变计划 (全8周)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f8f6f0;
+            color: #2d2a24;
+            padding: 16px 12px 40px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0 12px;
+            border-bottom: 2px solid #e6d5c0;
+        }
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #4a3a2c;
+        }
+        .header h1 span {
+            color: #c77d4a;
+        }
+        .header .sub {
+            font-size: 14px;
+            color: #7a6a5a;
+            margin-top: 4px;
+        }
+        .badge {
+            display: inline-block;
+            background: #c77d4a;
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 18px 16px;
+            margin-top: 16px;
+            border: 1px solid #ede8df;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: #3d3328;
+        }
+        .card-title .emoji {
+            font-size: 22px;
+        }
+        .card-sub {
+            font-size: 14px;
+            color: #7a6a5a;
+            margin-bottom: 12px;
+            border-left: 4px solid #c77d4a;
+            padding-left: 12px;
+        }
+        .goal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            text-align: center;
+            margin: 8px 0 4px;
+        }
+        .goal-item {
+            background: #f4efe8;
+            border-radius: 14px;
+            padding: 10px 4px;
+        }
+        .goal-item .num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4a3a2c;
+        }
+        .goal-item .label {
+            font-size: 12px;
+            color: #7a6a5a;
+            margin-top: 2px;
+        }
+        .goal-item .change {
+            font-size: 12px;
+            color: #a67c5a;
+            font-weight: 500;
+        }
+        .phase {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 6px 0 4px;
+        }
+        .phase-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: #faf7f2;
+            border-radius: 14px;
+            padding: 14px 14px;
+            border-left: 6px solid #c77d4a;
+        }
+        .phase-item .phase-num {
+            font-weight: 700;
+            font-size: 15px;
+            color: #c77d4a;
+            min-width: 48px;
+        }
+        .phase-item .phase-detail {
+            flex: 1;
+        }
+        .phase-item .phase-detail .title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .phase-item .phase-detail .desc {
+            font-size: 13px;
+            color: #5a4e40;
+            margin-top: 2px;
+        }
+        .monthly-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .month-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: #faf7f2;
+            border-radius: 14px;
+            padding: 14px 14px;
+            border-left: 6px solid #a67c5a;
+        }
+        .month-item .month-tag {
+            font-weight: 700;
+            font-size: 18px;
+            color: #a67c5a;
+            min-width: 44px;
+            line-height: 1.3;
+        }
+        .month-item .month-detail {
+            flex: 1;
+        }
+        .month-item .month-detail .month-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #3d3328;
+        }
+        .month-item .month-detail .month-desc {
+            font-size: 13px;
+            color: #5a4e40;
+            margin-top: 2px;
+            line-height: 1.5;
+        }
+        .month-item .month-detail .month-result {
+            font-size: 13px;
+            font-weight: 600;
+            color: #c77d4a;
+            margin-top: 4px;
+            background: #f4efe8;
+            border-radius: 30px;
+            padding: 2px 12px;
+            display: inline-block;
+        }
+        .accordion {
+            margin-top: 12px;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #ede8df;
+        }
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        .accordion-header {
+            background: #faf7f2;
+            padding: 14px 12px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background: #f0e8dc;
+        }
+        .accordion-header .day-tag {
+            background: #c77d4a;
+            color: #fff;
+            border-radius: 30px;
+            padding: 2px 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .accordion-header .arrow {
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .accordion-header.active .arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 12px;
+            background: #ffffff;
+            border-radius: 0 0 12px 12px;
+        }
+        .accordion-body.open {
+            max-height: 2000px;
+            padding: 12px 12px 16px;
+        }
+        .day-schedule {
+            font-size: 14px;
+        }
+        .day-schedule .time-block {
+            display: flex;
+            border-bottom: 1px dashed #f0e8dc;
+            padding: 8px 0;
+        }
+        .day-schedule .time-block:last-child {
+            border-bottom: none;
+        }
+        .day-schedule .time {
+            font-weight: 600;
+            color: #c77d4a;
+            min-width: 60px;
+            font-size: 13px;
+        }
+        .day-schedule .content {
+            flex: 1;
+            padding-left: 8px;
+        }
+        .day-schedule .content .note {
+            font-size: 12px;
+            color: #8a7a6a;
+        }
+        .highlight-box {
+            background: #fcf6ed;
+            border-radius: 14px;
+            padding: 14px 16px;
+            border-left: 6px solid #c77d4a;
+            margin: 12px 0 6px;
+            font-size: 14px;
+        }
+        .highlight-box strong {
+            color: #c77d4a;
+        }
+        .tag {
+            display: inline-block;
+            background: #ede8df;
+            border-radius: 30px;
+            padding: 2px 12px;
+            font-size: 12px;
+            color: #4a3a2c;
+            margin-right: 6px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 24px;
+            border-top: 1px solid #ede8df;
+            padding-top: 20px;
+        }
+        @media (max-width: 420px) {
+            .goal-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .goal-item:last-child {
+                grid-column: span 2;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>👩‍🍼 <span>5个月</span>·蜕变</h1>
+        <div class="sub">全职宝妈 · 健康减脂 · 不节食不焦虑</div>
+        <div class="badge">🔥 体脂率 36.6% → 目标 28%</div>
+    </div>
+
+    <!-- 目标概览 -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🎯</span> 5个月总目标</div>
+        <div class="goal-grid">
+            <div class="goal-item">
+                <div class="num">73.6 → 65</div>
+                <div class="label">体重 (kg)</div>
+                <div class="change">⬇ -8.6</div>
+            </div>
+            <div class="goal-item">
+                <div class="num">36.6% → 28%</div>
+                <div class="label">体脂率</div>
+                <div class="change">⬇ -8.6%</div>
+            </div>
+            <div class="goal-item">
+                <div class="num">11 → 7</div>
+                <div class="label">内脏脂肪等级</div>
+                <div class="change">⬇ 降4级</div>
+            </div>
+        </div>
+        <div style="font-size:13px; color:#7a6a5a; margin-top:8px; text-align:center;">
+            <span class="tag">✅ 肌肉量保持</span>
+            <span class="tag">💧 水分标准</span>
+            <span class="tag">🦴 骨量标准</span>
+        </div>
+    </div>
+
+    <!-- 三阶段战略 -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">📅</span> 三阶段战略</div>
+        <div class="phase">
+            <div class="phase-item">
+                <div class="phase-num">Phase 1</div>
+                <div class="phase-detail">
+                    <div class="title">修复适应期 · 9月</div>
+                    <div class="desc">16+8轻断食适应 · 碎片化低强度运动 · 体重↓~2kg</div>
+                </div>
+            </div>
+            <div class="phase-item">
+                <div class="phase-num">Phase 2</div>
+                <div class="phase-detail">
+                    <div class="title">黄金燃脂期 · 10~12月</div>
+                    <div class="desc">晚餐液体轻食 · 力量+有氧结合 · 每月↓2~2.5kg</div>
+                </div>
+            </div>
+            <div class="phase-item">
+                <div class="phase-num">Phase 3</div>
+                <div class="phase-detail">
+                    <div class="title">代谢修复期 · 1~2月初</div>
+                    <div class="desc">热量回升 · 冲刺塑形 · 稳住65kg · 体年龄↓</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 每月战略 -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🗓️</span> 每月战略目标</div>
+        <div class="card-sub">逐月递进 · 有的放矢</div>
+        <div class="monthly-list">
+            <div class="month-item">
+                <div class="month-tag">9月</div>
+                <div class="month-detail">
+                    <div class="month-title">适应与启动 · 习惯养成</div>
+                    <div class="month-desc">严格执行16:8窗口，戒断液体糖和零食；以碎片化低强度运动（抱娃深蹲、推车快走）为主，让身体适应新节奏。</div>
+                    <div class="month-result">🎯 预期：体重↓约2kg，腰围开始变软</div>
+                </div>
+            </div>
+            <div class="month-item">
+                <div class="month-tag">10月</div>
+                <div class="month-detail">
+                    <div class="month-title">加速燃脂 · 力量介入</div>
+                    <div class="month-desc">晚餐全面切换为“液体轻食”（无糖酸奶/豆浆+蛋白），每周增加2次居家力量训练（弹力带/矿泉水瓶），有氧时长拉长至40分钟。</div>
+                    <div class="month-result">🎯 预期：体重↓约2.5kg，内脏脂肪等级开始下降</div>
+                </div>
+            </div>
+            <div class="month-item">
+                <div class="month-tag">11月</div>
+                <div class="month-detail">
+                    <div class="month-title">持续攻坚 · 代谢激活</div>
+                    <div class="month-desc">引入“空腹有氧”（早晨推车快走）和“欺骗餐”（每10天一次，自由吃），防止代谢适应；增加HIIT（低冲击开合走）替代部分匀速有氧。</div>
+                    <div class="month-result">🎯 预期：体重↓约2.5kg，体脂率明显下降</div>
+                </div>
+            </div>
+            <div class="month-item">
+                <div class="month-tag">12月</div>
+                <div class="month-detail">
+                    <div class="month-title">突破平台 · 碳水循环</div>
+                    <div class="month-desc">采用“高低碳水日”策略（运动日多吃主食，休息日低碳），打破可能出现的平台期；运动强度维持，增加负重深蹲和俯身划船。</div>
+                    <div class="month-result">🎯 预期：体重↓约2kg，腰腹收紧明显</div>
+                </div>
+            </div>
+            <div class="month-item">
+                <div class="month-tag">1月</div>
+                <div class="month-detail">
+                    <div class="month-title">冲刺塑形 · 代谢修复</div>
+                    <div class="month-desc">热量逐步回升至1600~1700大卡，增加优质脂肪（牛油果、坚果），让身体“信任”新体重；运动侧重紧致线条，减少有氧频率，增加低强度拉伸。</div>
+                    <div class="month-result">🎯 预期：体重稳定在64~66kg，体年龄接近36岁</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第一周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">📋</span> 第一周 · 启动适应</div>
+        <div class="card-sub">9月7日 ~ 9月13日 · 16+8窗口 10:00-18:00</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周一 9/7</span><span class="day-tag">Day 1</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 微波炉鸡蛋2个（1全蛋+1蛋白）+ 牛奶250ml + 半根甜玉米</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 空气炸锅辣烤鸡腿（去皮200g）+ 微波炉生菜200g（小米辣+醋）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 半根香蕉 + 原地慢速高抬腿5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🦐 虾仁豆腐汤（虾仁100g+豆腐150g+金针菇）无主食</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🏋️ 抱娃深蹲累计30个，饮水2.2L</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周二 9/8</span><span class="day-tag">Day 2</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸红薯150g + 水煮蛋2个（1个黄）+ 无糖豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 孜然牛肉条200g（空气炸锅）+ 微波炉西兰花200g（辣椒盐）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 烤苹果（1个，180度10分钟）+ 靠墙静蹲累计5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🐟 煎龙利鱼200g + 冬瓜汤（无油）</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🚶 推车变速快走30分钟（快2慢1）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周三 9/9</span><span class="day-tag">Day 3</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 微波炉燕麦粥（30g燕麦+1个蛋+水）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣烤冻豆腐200g + 微波炉菠菜200g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🎃 贝贝南瓜（空气炸锅200度15分钟）+ 原地后抬腿5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 番茄金针菇蛋汤（2蛋白+1蛋黄）</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🧘 跪姿平板支撑 30秒×5组</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周四 9/10</span><span class="day-tag">Day 4</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 玉米+鸡蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐔 辣烤鸡胸肉200g（片薄）+ 微波炉油麦菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 半根香蕉+1个蛋白 + 开合走5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍄 菌菇豆腐汤</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🦅 鸟狗式 3组×12次（娃午睡）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周五 9/11</span><span class="day-tag">Day 5</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 烤去皮鸭腿/鸡翅中3个 + 冷冻杂蔬粒200g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍠 烤红薯（小号）+ 深蹲50个（手扶椅）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🐟 清蒸鳕鱼 + 凉拌黄瓜</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🚶 抱娃踱步快走累计20分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周六 9/12</span><span class="day-tag">Day 6</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦面包1片+水煮蛋2个+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包辣烤瘦五花肉150g + 蒜片小米辣</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍫 微波炉香蕉可可蛋糕 + 抱娃深蹲3组×10个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥗 菠菜豆腐汤</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🧘 死虫式15分钟（队友看娃）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周日 9/13</span><span class="day-tag">Day 7</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸山药150g+鸡蛋2个+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤三文鱼200g + 微波炉芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🌽 水煮玉米整根 + 推车快走30分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍲 菌菇虾仁青菜乱炖</span></div><div class="time-block"><span class="time">睡前</span><span class="content">🧘 腹式呼吸5分钟</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第二周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">⚡</span> 第二周 · 进阶燃脂</div>
+        <div class="card-sub">9月14日 ~ 9月20日 · 晚餐液体轻食 · 空腹唤醒</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周一 9/14</span><span class="day-tag">Day 8</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 空腹唤醒：温水+开合走3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 微波炉燕麦鸡蛋羹（30g燕麦+2蛋）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣烤鸡腿（去皮200g）+ 微波炉西兰花</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果1个 + 靠墙静蹲累计5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶150g + 2个水煮蛋白（+10颗巴旦木若饿）</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🏋️ 抱娃深蹲40个</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周二 9/15</span><span class="day-tag">Day 9</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+慢速高抬腿3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸红薯150g + 2个水煮蛋（1个黄）+ 牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 孜然牛肉条200g + 微波炉菠菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃1个+小橘子1个 + 鸟狗式3组×10次</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖豆浆400ml + 1个水煮蛋白</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🚶 推车变速快走25分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周三 9/16</span><span class="day-tag">Day 10</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+原地后踢腿3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 甜玉米半根 + 微波炉鸡蛋羹（2蛋）+ 无糖豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣烤冻豆腐200g + 微波炉生菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 小香蕉1根 + 跪姿平板支撑30秒×5组</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 纯牛奶250ml + 1个蛋白 + 小番茄5颗</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🧘 死虫式15分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周四 9/17</span><span class="day-tag">Day 11</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+抱娃原地踏步3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐔 辣烤鸡胸肉200g + 微波炉油麦菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨1个 + 深蹲50个（手扶椅）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶150g + 10颗巴旦木</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🧘 侧弓步拉伸累计10分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周五 9/18</span><span class="day-tag">Day 12</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+开合走3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸山药150g + 水煮蛋2个（1个黄）+ 牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 烤去皮鸭腿 + 冷冻杂蔬粒200g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 半个火龙果 + 慢速高抬腿5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜虾皮汤 + 2个水煮蛋白</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🚶 推车快走30分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周六 9/19</span><span class="day-tag">Day 13</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+抱娃深蹲（浅蹲）3组×10个</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦面包1片+2个蛋+无糖豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包辣烤瘦五花肉150g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子1个 + 靠墙静蹲累计6分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉冲饮或无糖酸奶200g+草莓</span></div><div class="time-block"><span class="time">碎片</span><span class="content">🧘 组合核心训练20分钟（队友看娃）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>🌞 周日 9/20</span><span class="day-tag">Day 14</span><span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:50</span><span class="content">💧 温水+轻柔拉伸5分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸红薯+2个蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤三文鱼200g + 微波炉芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉1根 + 推车快走40分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 番茄菌菇煮豆腐</span></div><div class="time-block"><span class="time">睡前</span><span class="content">🧘 腹式呼吸5分钟</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第三周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🔥</span> 第三周 · 燃脂进阶</div>
+        <div class="card-sub">9月21日 ~ 9月27日 · 晚餐流质 · 加入弹力带上肢训练</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 9/21</span><span class="day-tag">Day 15</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹（30g燕麦+2蛋）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣烤鸡腿（去皮200g）+ 西兰花</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+靠墙静蹲5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶150g+2个蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 午睡时弹力带划船 3组×15次</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 9/22</span><span class="day-tag">Day 16</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸红薯150g+2个蛋（1黄）+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 孜然牛肉条200g+菠菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+鸟狗式3组×12次</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖豆浆400ml+1个蛋白</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车变速快走35分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 9/23</span><span class="day-tag">Day 17</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 甜玉米半根+鸡蛋羹（2蛋）+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣烤冻豆腐200g+生菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 小香蕉+平板支撑30秒×5组</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 纯牛奶250ml+1蛋白+小番茄</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 矿泉水瓶二头弯举 3组×15次</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 9/24</span><span class="day-tag">Day 18</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 烤鸭腿+杂蔬粒200g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+深蹲60个（手扶椅）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶150g+巴旦木10颗</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车快走30分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 9/25</span><span class="day-tag">Day 19</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸山药150g+2个蛋（1黄）+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼200g+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 半个火龙果+高抬腿5分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜虾皮汤+2个蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 弹力带划船+二头弯举各3组</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 9/26</span><span class="day-tag">Day 20</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦面包1片+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包瘦五花肉150g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+靠墙静蹲6分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/无糖酸奶200g</span></div><div class="time-block"><span class="time">核心</span><span class="content">🧘 死虫式+鸟狗式组合20分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 9/27</span><span class="day-tag">Day 21</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蒸红薯+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼200g+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+推车快走40分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 番茄菌菇豆腐</span></div><div class="time-block"><span class="time">睡前</span><span class="content">🧘 腹式呼吸5分钟</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第四周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">💪</span> 第四周 · 力量强化</div>
+        <div class="card-sub">9月28日 ~ 10月4日 · 增加负重 · 午餐肉类增至220g</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 9/28</span><span class="day-tag">Day 22</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣烤鸡腿（去皮220g）+西兰花</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+深蹲（抱娃）3组×12个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶200g+2蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 矿泉水瓶深蹲+划船 各4组</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 9/29</span><span class="day-tag">Day 23</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯200g+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 牛肉条220g+菠菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+鸟狗式4组×12次</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖豆浆500ml+1蛋白</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车快走35分钟（变速）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 9/30</span><span class="day-tag">Day 24</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 玉米半根+蛋羹（3蛋清）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣烤冻豆腐250g+生菜</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+平板支撑1分钟×4组</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 纯牛奶250ml+2蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 弹力带硬拉 4组×15次</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 10/1</span><span class="day-tag">Day 25</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 烤鸭腿+杂蔬粒</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+深蹲80个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶200g+巴旦木</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车快走40分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 10/2</span><span class="day-tag">Day 26</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 山药200g+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼220g+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 火龙果+高抬腿6分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜汤+3个蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 全身力量循环（深蹲+划船+硬拉）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 10/3</span><span class="day-tag">Day 27</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包五花肉（瘦）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+静蹲7分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/酸奶+草莓</span></div><div class="time-block"><span class="time">核心</span><span class="content">🧘 核心强化20分钟（队友看娃）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 10/4</span><span class="day-tag">Day 28</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+快走45分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 番茄菌菇豆腐</span></div><div class="time-block"><span class="time">睡前</span><span class="content">🧘 腹式呼吸5分钟</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第五周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🌅</span> 第五周 · 空腹激活</div>
+        <div class="card-sub">10月5日 ~ 10月11日 · 晨起空腹激活 · 午餐可选糙米饭</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 10/5</span><span class="day-tag">Day 29</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：开合走5分钟（早餐前）</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦鸡蛋羹+半根玉米</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣鸡腿+西兰花+50g糙米饭（训练日）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+深蹲50个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 无糖酸奶200g+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 10/6</span><span class="day-tag">Day 30</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：高抬腿3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 牛肉条+菠菜（无主食，休息日）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+鸟狗式3组</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 豆浆500ml+1蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 10/7</span><span class="day-tag">Day 31</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：后踢腿3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 玉米+蛋羹+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣豆腐+生菜+糙米饭50g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+平板1分钟×4</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 牛奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 10/8</span><span class="day-tag">Day 32</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：抱娃原地踏步3分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 鸭腿+杂蔬（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+深蹲80个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+巴旦木</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 10/9</span><span class="day-tag">Day 33</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：开合走5分钟</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 山药+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼+芦笋+糙米饭50g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 火龙果+高抬腿6分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜虾皮汤+3蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 10/10</span><span class="day-tag">Day 34</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">09:30</span><span class="content">🌅 空腹激活：抱娃深蹲3组</span></div><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包五花肉（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+静蹲7分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/酸奶+草莓</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 10/11</span><span class="day-tag">Day 35</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+牛奶（空腹有氧取消）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+快走40分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 菌菇豆腐</span></div><div class="time-block"><span class="time">睡前</span><span class="content">🧘 腹式呼吸</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第六周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">⚡</span> 第六周 · HIIT攻坚</div>
+        <div class="card-sub">10月12日 ~ 10月18日 · 低冲击HIIT · 每周3次</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 10/12</span><span class="day-tag">Day 36</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹+玉米</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣鸡腿+西兰花+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+HIIT（开合走30秒+高抬腿30秒循环5组）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 10/13</span><span class="day-tag">Day 37</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 牛肉+菠菜（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+鸟狗式</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 豆浆+1蛋白</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车变速走35分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 10/14</span><span class="day-tag">Day 38</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 玉米+蛋羹+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣豆腐+生菜+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+HIIT（同上）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 牛奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 10/15</span><span class="day-tag">Day 39</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 鸭腿+杂蔬（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+深蹲80个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+巴旦木</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 10/16</span><span class="day-tag">Day 40</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 山药+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼+芦笋+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 火龙果+HIIT</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜汤+3蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 10/17</span><span class="day-tag">Day 41</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包五花肉</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+静蹲</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/酸奶</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 10/18</span><span class="day-tag">Day 42</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+快走40分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 菌菇豆腐</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第七周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🔄</span> 第七周 · 碳水循环</div>
+        <div class="card-sub">10月19日 ~ 10月25日 · 训练日有主食 · 休息日无主食</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 10/19 (训练日)</span><span class="day-tag">Day 43</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹+玉米</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣鸡腿+西兰花+糙米80g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+力量训练（弹力带）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 10/20 (休息日)</span><span class="day-tag">Day 44</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 2个蛋+豆浆（无主食）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 牛肉条+菠菜（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+拉伸</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 豆浆+1蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 10/21 (训练日)</span><span class="day-tag">Day 45</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣豆腐+生菜+糙米80g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+HIIT</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 牛奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 10/22 (休息日)</span><span class="day-tag">Day 46</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 蛋羹+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 鸭腿+杂蔬（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+散步</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+巴旦木</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 10/23 (训练日)</span><span class="day-tag">Day 47</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 山药+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼+芦笋+糙米80g</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 火龙果+力量训练</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜汤+3蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 10/24 (休息日)</span><span class="day-tag">Day 48</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦1片+2蛋（少碳水）</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包五花肉（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+拉伸</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/酸奶</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 10/25 (放松)</span><span class="day-tag">Day 49</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+快走40分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 菌菇豆腐</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== 第八周 =============== -->
+    <div class="card">
+        <div class="card-title"><span class="emoji">🏆</span> 第八周 · 巩固突破</div>
+        <div class="card-sub">10月26日 ~ 11月1日 · 加量冲刺 · 深蹲100个/平板1分钟</div>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周一 10/26</span><span class="day-tag">Day 50</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹+玉米</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🍗 辣鸡腿+西兰花+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍎 苹果+深蹲100个（分4组）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+3蛋白</span></div><div class="time-block"><span class="time">力量</span><span class="content">💪 全身力量循环（组数增加）</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周二 10/27</span><span class="day-tag">Day 51</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥩 牛肉+菠菜（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🥝 猕猴桃+平板1分钟×5组</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 豆浆+2蛋白</span></div><div class="time-block"><span class="time">有氧</span><span class="content">🚶 推车快走40分钟</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周三 10/28</span><span class="day-tag">Day 52</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 玉米+蛋羹+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🧈 辣豆腐+生菜+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+HIIT（增加至6组）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 牛奶+2蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周四 10/29</span><span class="day-tag">Day 53</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 燕麦羹</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🦆 鸭腿+杂蔬（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍐 梨+深蹲100个</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 酸奶+巴旦木</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周五 10/30</span><span class="day-tag">Day 54</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 山药+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 烤鱼+芦笋+糙米</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍉 火龙果+力量训练（大重量）</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥣 冬瓜汤+3蛋白</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周六 10/31</span><span class="day-tag">Day 55</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 全麦+2蛋+豆浆</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🥓 生菜包五花肉（无主食）</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍊 橙子+静蹲8分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🥛 蛋白粉/酸奶+草莓</span></div></div></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)"><span>🌞 周日 11/1</span><span class="day-tag">Day 56</span><span class="arrow">▼</span></div>
+                <div class="accordion-body"><div class="day-schedule"><div class="time-block"><span class="time">10:00</span><span class="content">🥣 红薯+2蛋+牛奶</span></div><div class="time-block"><span class="time">12:30</span><span class="content">🐟 三文鱼+芦笋</span></div><div class="time-block"><span class="time">15:30</span><span class="content">🍌 香蕉+快走45分钟</span></div><div class="time-block"><span class="time">17:30</span><span class="content">🍅 菌菇豆腐</span></div><div class="time-block"><span class="time">总结</span><span class="content">📊 本周结束，记录体重腰围变化</span></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心铁律 -->
+    <div class="highlight-box">
+        <strong>📌 每日必守铁律</strong><br>
+        ✅ 16:8 进食窗口（10:00-18:00），其余只喝温水<br>
+        ✅ 每天饮水 ≥ 2.2L（设闹钟每小时喝）<br>
+        ✅ 甜点后必须做5分钟微运动（降糖）<br>
+        ✅ 带娃碎片运动累计（深蹲、靠墙、推车快走）<br>
+        ✅ 睡眠不足时降低运动强度，以拉伸为主
+    </div>
+
+    <!-- 厨房贴士 -->
+    <div class="card">
+        <div class="card-title" style="font-size:16px;"><span class="emoji">🍳</span> 厨房小贴士</div>
+        <ul style="font-size:13px; color:#4a3a2c; padding-left:18px; list-style-type: '✔️ '; line-height:1.8;">
+            <li>空气炸锅肉类：200℃ 10-15分钟（中途翻面）</li>
+            <li>微波炉蔬菜：高火2-3分钟，淋醋汁或辣椒粉</li>
+            <li>无代糖甜点：香蕉/红薯/苹果天然甜味</li>
+            <li>辣味代替：辣椒粉、小米辣、蒜蓉辣酱（少油）</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        💪 第8周结束，黄金燃脂期已过2/3 · 继续坚持，12月将迎来更大突破！
+    </div>
+
+</div>
+
+<script>
+    function toggleAccordion(header) {
+        const body = header.nextElementSibling;
+        const isOpen = body.classList.contains('open');
+        document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+        document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+        if (!isOpen) {
+            body.classList.add('open');
+            header.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
